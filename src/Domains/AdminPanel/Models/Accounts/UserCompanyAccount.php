@@ -106,7 +106,6 @@ class UserCompanyAccount extends AggregateRoot
         domainEvent($event);
     }
 
-
     /**
      * @return CompanyAccount
      */

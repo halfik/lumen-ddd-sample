@@ -41,6 +41,18 @@ But one that does add new logic in given context, should have own models. It wil
 - define and understand what given model does and is used for in given context
 - if needed, move whole module from our application to a new application. We have an option to split monolith to microservices
 
+#### DDD Models
+There are few simple rules we can't break when we define models:
+
+1. Model properties can't be changed any other way than by model itself. 
+   Only way to change model from outside is to perform action on it. 
+2. Each public function in model is in fact action defined by business. Anything that is not action that user can perform on model, should be private.
+3. Models do synchronize with each other using domain events.
+4. Application can never exist in incorrect state. And models job is to ensure it is not possible.
+   Models have to be defined they way that developer can't use them incorrectly.
+5. Models in module do not use definitions from other modules except Common.
+
+
 #### Common module
 There is a Common domain where we can add models that are common for all domain to avoid replicating them.
 Common domain can be also used as a place to keep own wrappers around external libraries.
