@@ -9,14 +9,14 @@ Reason we need data mapper is to separate domain from database layer. With activ
 
 
 ## Architecture
-Application is split into 3 layers:
+Application have 3 layers:
 
 - Domain
 - Infrastructure
 - Application
 
-Each layer is split into modules. Each of modules that does represent domain bounded context defines contracts (they are kept in common module)
-that other modules can use to communicate/understand.
+Each layer is split into modules. Each of modules does represent domain bounded context.
+There is one special module: Common.
 
 #### Domain layer
 Domain layer should not use any external tools. Domain should not be tied to a framework or any external library.
@@ -41,12 +41,14 @@ But one that does add new logic in given context, should have own models. It wil
 - define and understand what given model does and is used for in given context
 - if needed, move whole module from our application to a new application. We have an option to split monolith to microservices
 
-#### Common domain
+#### Common module
 There is a Common domain where we can add models that are common for all domain to avoid replicating them.
-Common domain can be used as a place to keep own wrappers around external libraries.
+Common domain can be also used as a place to keep own wrappers around external libraries.
 
-So if there is no need or time to write own solutions for every small problem. It is a good idea to use external library.
-But we should not use it in domain layer. It will be problematic if in future we try to replace it with another one.
+If there is no need or time to write own solutions for every small problem. It is a good idea to use external library.
+But we should not use it in domain layer (it should stay framework/external tools agnostic). 
+
+Using external libraries in our domains will be problematic if in future we try to replace it with another one.
 So better approach is to use Common to create own class that will use external library to implement what we need. 
 And if we will have to swap that library into another one that wrapper class is only one we will have to change.
 
