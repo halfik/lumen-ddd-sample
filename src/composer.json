@@ -1,0 +1,61 @@
+{
+    "name": "halfik/lumen-ddd-sample",
+    "description": "Lumen sample app",
+    "keywords": ["Lumen", "DDD"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.0",
+        "ext-json": "*",
+        "ext-pcntl": "*",
+        "ext-pdo": "*",
+        "ext-sockets": "*",
+        "bschmitt/laravel-amqp": "^2.1",
+        "crocodile2u/imgproxy-php": "^2.0",
+        "darkaonline/swagger-lume": "^9.0",
+        "enqueue/amqp-lib": "^0.10.9",
+        "firebase/php-jwt": "^6.3",
+        "fruitcake/laravel-cors": "^3.0",
+        "illuminate/mail": "^9.51",
+        "illuminate/notifications": "^9.51",
+        "laravel-doctrine/orm": "^1.8",
+        "laravel/lumen-framework": "^9.1",
+        "league/flysystem": "^3.12",
+        "league/flysystem-aws-s3-v3": "^3.12",
+        "martin-georgiev/postgresql-for-doctrine": "^1.8",
+        "webmozart/assert": "^1.11",
+        "pulkitjalan/google-apiclient": "^6.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.4.4",
+        "phpunit/phpunit": "^9.5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "Application/",
+            "Domains\\": "Domains/",
+            "Infrastructure\\": "Infrastructure/"
+        },
+        "classmap": [
+            "Infrastructure/Persistence/Database/Seeders"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "Tests/"
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

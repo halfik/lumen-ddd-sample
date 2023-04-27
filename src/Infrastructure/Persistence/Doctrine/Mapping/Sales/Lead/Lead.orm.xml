@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity
+        name="Domains\Sales\Models\Lead\Lead"
+        table="leads"
+    >
+        <many-to-one field="companyAccount" target-entity="Domains\Accounts\Models\Company\CompanyAccount">
+            <join-column name="company_account__id" on-delete="CASCADE" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="stage" inversed-by="leads" target-entity="Domains\Sales\Models\Workflow\Stage">
+            <join-column name="stage__id" on-delete="RESTRICT" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="owner" target-entity="Domains\Accounts\Models\User\User">
+            <join-column name="owner__id" on-delete="RESTRICT" nullable="false"/>
+        </many-to-one>
+
+        <many-to-one field="createdBy" target-entity="Domains\Accounts\Models\User\User">
+            <join-column name="created__by" on-delete="RESTRICT" nullable="false"/>
+        </many-to-one>
+
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="uuid" column="id" type="lead_id"/>
+
+        <field name="title" length="255"/>
+        <field name="customOutcome" type="text"/>
+
+        <field name="estimatedRevenue" type="revenue"/>
+        <field name="actualRevenue" type="revenue"/>
+
+        <field name="plannedCloseAt" type="datetime_immutable"/>
+        <field name="closedAt" type="datetime_immutable"  nullable="true"/>
+
+        <field name="source" type="aggregate_source" />
+
+        <field name="version" type="integer"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+        <field name="stageChangedAt" type="datetime_immutable"/>
+        <field name="assignedAt" type="datetime_immutable"/>
+        <field name="deletedAt" type="datetime_immutable" nullable="true"/>
+
+    </entity>
+</doctrine-mapping>

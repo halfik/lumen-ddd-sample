@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity
+        name="Domains\Sales\Models\Workflow\Workflow"
+        table="workflows"
+    >
+        <one-to-many field="stages"
+                     target-entity="Domains\Sales\Models\Workflow\Stage"
+                     mapped-by="workflow"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <order-by>
+                <order-by-field name="position"/>
+            </order-by>
+        </one-to-many>
+
+        <many-to-one field="companyAccount" inversed-by="workflows" target-entity="Domains\Accounts\Models\Company\CompanyAccount">
+            <join-column name="company_account__id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="uuid" column="id" type="workflow_id"/>
+        <field name="name" length="255"/>
+        <field name="version" type="integer"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+    </entity>
+</doctrine-mapping>

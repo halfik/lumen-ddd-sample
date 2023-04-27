@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+
+    <entity
+        name="Domains\Sales\Models\Workflow\Stage"
+        table="workflows_stages"
+    >
+        <many-to-one field="workflow" target-entity="Domains\Sales\Models\Workflow\Workflow" inversed-by="stages">
+            <join-column name="workflow__id" on-delete="CASCADE" nullable="false"/>
+        </many-to-one>
+
+        <one-to-many field="leads"
+                     target-entity="Domains\Sales\Models\Lead\Lead"
+                     mapped-by="stage"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="uuid" column="id" type="stage_id"/>
+
+        <field name="type" type="stage_type"/>
+        <field name="name" length="255"/>
+        <field name="position" type="smallint"/>
+
+        <field name="estimatedRevenue" type="revenue"/>
+        <field name="actualRevenue" type="revenue"/>
+
+        <field name="version" type="integer"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+        <field name="deletedAt" type="datetime_immutable" nullable="true"/>
+    </entity>
+</doctrine-mapping>

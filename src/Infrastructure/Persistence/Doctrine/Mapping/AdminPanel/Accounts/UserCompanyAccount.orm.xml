@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity
+        name="Domains\AdminPanel\Models\Accounts\UserCompanyAccount"
+        table="users__company_accounts"
+    >
+        <many-to-one field="user" inversed-by="userCompanyAccounts" target-entity="Domains\AdminPanel\Models\Accounts\User" fetch="EAGER">
+            <join-column name="user__id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
+
+        <many-to-one field="companyAccount"  inversed-by="users" target-entity="Domains\AdminPanel\Models\Accounts\CompanyAccount" fetch="EAGER">
+            <join-column name="company_account__id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
+
+
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="uuid" column="id" type="generic_id"/>
+
+        <field name="role" type="role" length="30"/>
+        <field name="status" length="50"/>
+
+        <field name="version" type="integer"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+    </entity>
+</doctrine-mapping>

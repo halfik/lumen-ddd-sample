@@ -1,0 +1,8 @@
+src/vendor
+src/.env
+.idea
+/.env
+.phpunit.result.cache
+src/app/storage
+!src/app/storage/api-docs/
+!src/app/storage/tmp/

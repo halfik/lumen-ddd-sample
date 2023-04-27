@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
+    <entity
+        name="Domains\AdminPanel\Models\Accounts\CompanyAccount"
+        table="company_accounts"
+    >
+        <one-to-many field="users"
+                     target-entity="Domains\AdminPanel\Models\Accounts\UserCompanyAccount"
+                     mapped-by="companyAccount"
+        >
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="workflows"
+                     target-entity="Domains\AdminPanel\Models\Sales\Workflow"
+                     mapped-by="companyAccount"
+        />
+
+        <indexes>
+            <index columns="id"/>
+        </indexes>
+
+        <id name="uuid" column="id" type="generic_id"/>
+
+        <field name="name" length="255"/>
+        <field name="isActive" type="boolean"/>
+
+        <field name="version" type="integer"/>
+        <field name="createdAt" type="datetime_immutable"/>
+        <field name="updatedAt" type="datetime_immutable"/>
+    </entity>
+</doctrine-mapping>
